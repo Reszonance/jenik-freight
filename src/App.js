@@ -411,7 +411,7 @@ class ShippingForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-
+  
         {/* Submit Button */}
         <div>
           <button type="submit">Submit</button>
@@ -446,27 +446,30 @@ class ShippingForm extends Component {
           {currentPage === 4 && this.renderPage4()}
           {currentPage === 5 && this.renderPage5()}
 
-          {currentPage !== 1 && (
-            <button type="button" onClick={this.prevPage}>
-              Previous
-            </button>
-          )}
-          {currentPage !== 5 && (
-            <button type="button" onClick={this.nextPage}>
-              Next
-            </button>
-          )}
-        </form>
-
-        {this.state.submitted && (
+          {/* Buttons */}
           <div>
-            <p>Thank you for submitting the form!</p>
+            {currentPage !== 1 && (
+              <button type="button" onClick={this.prevPage}>
+                Previous
+              </button>
+            )}
+
+            {/* Show "Submit" button on page 4 and "Next" button on all other pages */}
+            {currentPage === 4 ? (
+              <button type="submit">Submit</button>
+            ) : (
+              <button type="button" onClick={this.nextPage}>
+                Next
+              </button>
+            )}
           </div>
-        )}
+        </form>
       </div>
     );
   }
 }
+
+
 
 
 export default ShippingForm;
