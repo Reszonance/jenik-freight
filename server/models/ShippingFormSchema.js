@@ -1,0 +1,35 @@
+  const mongoose = require('mongoose');
+
+  const shippingFormSchema = new mongoose.Schema({
+    shipperFullName: String,
+    shipperAddress: String,
+    shipperCity: String,
+    shipperState: String,
+    shipperZipCode: String,
+    shipperCellPhone: String,
+    shipperEmail: String,
+    consigneeFullName: String,
+    consigneeAddress: String,
+    consigneeCity: String,
+    consigneeState: String,
+    consigneeZipCode: String,
+    consigneeCellPhone: String,
+    consigneeEmail: String,
+    numShipmentBoxes: Number,
+    weight: String,
+    deliveryOption: String,
+    pickupAddress: String,
+    cargoDescription: String,
+    includesLithiumBatteries: Boolean,
+    cargoValue: String,
+    requiresInsurance: Boolean,
+    packageDetails: [String],
+    packageDetailsLithium: [Boolean],
+    certifyNoDangerousGoods: Boolean,
+    agreeTerms: Boolean,
+    initials: String,
+    additionalComments: String,
+    submitted: Boolean,
+  });
+
+  module.exports = mongoose.model('ShippingForm', shippingFormSchema);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const serverPort = process.env.SERVER_PORT || 5000;
 
 class ShippingForm extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class ShippingForm extends Component {
       consigneeAddress: '',
       consigneeCity: '',
       consigneeState: '',
+      consigneeZipCode: '',
       consigneeCellPhone: '',
       consigneeEmail: '',
       numShipmentBoxes: 1,
@@ -32,7 +34,7 @@ class ShippingForm extends Component {
       agreeTerms: false,
       initials: '',
       additionalComments: '',
-      submitted: false, // Initialize the submitted property  
+      submitted: false,
     };
   }
 
@@ -64,11 +66,33 @@ class ShippingForm extends Component {
     this.setState({ [name]: val });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Data:', this.state);
-    this.setState({ submitted: true });
-  };
+    console.log('Handling form submission...');
+  
+    try {
+      const response = await fetch(`http://localhost:${serverPort}/submit-form`, { // Update the URL accordingly
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.state),
+      });
+  
+      console.log('Sent POST request to server.');
+  
+      if (response.status === 201) { // Check for a successful response status
+        this.setState({ submitted: true }); // Form submitted successfully
+        console.log('Form submitted successfully:', this.state);
+      } else {
+        console.error('Form submission failed. Response Status:', response.status);
+        // Optionally, you can add a message or trigger other actions here
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Optionally, you can add a message or trigger other actions here
+    }
+  };  
 
   nextPage = () => {
     this.setState((prevState) => ({
@@ -202,6 +226,17 @@ class ShippingForm extends Component {
             type="text"
             name="consigneeState"
             value={this.state.consigneeState}
+            onChange={this.handleInputChange}
+          />
+        </div>
+
+        {/* Consignee's Zip Code */}
+        <div>
+          <label>Consignee's Zip Code:</label>
+          <input
+            type="text"
+            name="consigneeZipCode"
+            value={this.state.consigneeZipCode}
             onChange={this.handleInputChange}
           />
         </div>
@@ -420,6 +455,7 @@ class ShippingForm extends Component {
     );
   };
 
+
   renderPage5 = () => {
     return (
       <div>
@@ -456,7 +492,8 @@ class ShippingForm extends Component {
 
             {/* Show "Submit" button on page 4 and "Next" button on all other pages */}
             {currentPage === 4 ? (
-              <button type="submit">Submit</button>
+              // <button type="submit">Submit</button>
+              <div></div>
             ) : (
               <button type="button" onClick={this.nextPage}>
                 Next
