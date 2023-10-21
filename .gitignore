@@ -1,15 +1,5 @@
-# Client Dependencies
-/client/package-lock.json
-/client/package.json
-
-# Server Dependencies
-/server/node_modules
-/server/package-lock.json
-/server/package.json
-
 # Environment Variables
 .env
 
 # dependencies
-/node_modules
-.env
+# /node_modules

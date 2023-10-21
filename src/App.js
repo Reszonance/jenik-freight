@@ -92,7 +92,7 @@ class ShippingForm extends Component {
       console.error('Error:', error);
       // Optionally, you can add a message or trigger other actions here
     }
-  };  
+  };
 
   nextPage = () => {
     this.setState((prevState) => ({
@@ -105,6 +105,44 @@ class ShippingForm extends Component {
       currentPage: prevState.currentPage - 1,
     }));
   };
+
+  // This unfinished function is supposed to determine the price of a quote based on the package details
+  // Details can be found here https://jenikservices.ca/air-consolidation-nigeria/
+  
+  // calculateQuote = () => {
+  //   const {
+  //     weight,
+  //     includesLithiumBatteries,
+  //     deliveryOption,
+  //     cargoValue,
+  //   } = this.state;
+  
+  //   // Constants for cost calculation
+  //   const MINIMUM_CARGO_WEIGHT = 10; // Minimum cargo weight (in kg)
+  //   const GENERAL_CARGO_RATE = 13; // Cost per kg for general cargo
+  //   const SPECIAL_CARGO_RATE = 14; // Cost per kg for special cargo (rechargable devices: laptops, phones, etc.)
+  //   const MIN_INSURANCE_AMOUNT = 100; // Minimum insurance amount
+  //   const INSURANCE_PERCENTAGE = 2; // Insurance percentage
+  //   const MIN_DELIVERY_COST_LAGOS = 25; // Minimum delivery cost within Lagos
+  //   const MIN_DELIVERY_COST_OUTSIDE_LAGOS = 50; // Minimum delivery cost outside Lagos
+  //   const DELIVERY_COST_LAGOS = 1; // Delivery cost per kg within Lagos
+  //   const DELIVERY_COST_OUTSIDE_LAGOS = 1.5; // Delivery cost per kg outside Lagos
+
+  //   // Cargo must be at least 10kg. Cargo weighing less than 10kg will be charged as if it weighs 10kg.
+  //   if (weight < MINIMUM_CARGO_WEIGHT){ weight = 10; }
+
+  //   // Cargo containing laptops, phones, and anything rechargeable (assuming that means it is based on litihium batteries)
+  //   const costPerKG = includesLithiumBatteries ? SPECIAL_CARGO_RATE : GENERAL_CARGO_RATE;
+    
+  //   return {
+  //     costPerKG,
+  //     declaredValue,
+  //     insurance,
+  //     cargoWeight,
+  //     deliveryCost,
+  //     totalCost,
+  //   };
+  // };
 
   renderPage1 = () => {
     return (
@@ -306,7 +344,8 @@ class ShippingForm extends Component {
             onChange={this.handleInputChange}
           >
             <option value="Pick up from Nigeria Office">Pick up from Nigeria Office</option>
-            <option value="Door to Door (extra cost)">Door to Door (extra cost)</option>
+            <option value="Door to Door (extra cost)">Door to Door outside Lagos (extra cost)</option>
+            <option value="Door to Door (extra cost)">Door to Door within Lagos (extra cost)</option>
             <option value="Airport to Airport">Airport to Airport</option>
           </select>
         </div>
@@ -364,13 +403,7 @@ class ShippingForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-      </div>
-    );
-  };
 
-  renderPage3 = () => {
-    return (
-      <div>
         {/* Package Details */}
         <div>
           <label>Details (Package x):</label>
@@ -433,8 +466,8 @@ class ShippingForm extends Component {
       </div>
     );
   };
-  
-  renderPage4 = () => {
+
+  renderPage3 = () => {
     return (
       <div>
         {/* Additional Comments */}
@@ -446,25 +479,6 @@ class ShippingForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-  
-        {/* Submit Button */}
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </div>
-    );
-  };
-
-
-  renderPage5 = () => {
-    return (
-      <div>
-        {/* Thank You Message */}
-        {this.state.submitted && (
-          <div>
-            <p>Thank you for submitting the form!</p>
-          </div>
-        )}
       </div>
     );
   };
@@ -479,9 +493,6 @@ class ShippingForm extends Component {
           {currentPage === 1 && this.renderPage1()}
           {currentPage === 2 && this.renderPage2()}
           {currentPage === 3 && this.renderPage3()}
-          {currentPage === 4 && this.renderPage4()}
-          {currentPage === 5 && this.renderPage5()}
-
           {/* Buttons */}
           <div>
             {currentPage !== 1 && (
@@ -491,9 +502,10 @@ class ShippingForm extends Component {
             )}
 
             {/* Show "Submit" button on page 4 and "Next" button on all other pages */}
-            {currentPage === 4 ? (
-              // <button type="submit">Submit</button>
-              <div></div>
+            {currentPage === 3 ? (
+              <div>
+                <button type="submit">Submit</button>
+              </div>
             ) : (
               <button type="button" onClick={this.nextPage}>
                 Next
@@ -505,8 +517,5 @@ class ShippingForm extends Component {
     );
   }
 }
-
-
-
 
 export default ShippingForm;

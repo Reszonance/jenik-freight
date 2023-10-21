@@ -1,59 +1,81 @@
-/* app.css */
-
-/* General styling for the form container */
-.container {
-  width: 80%;
-  max-width: 600px;
+/* Define styles for the entire form container */
+.form-container {
+  font-family: Arial, sans-serif;
+  max-width: 500px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #f8f8f8;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Styling for form sections (pages) */
-.page {
-  display: none;
+/* Style the form title */
+.form-title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Style form sections */
+.form-section {
   margin-bottom: 20px;
 }
 
-.page.active {
-  display: block;
-}
-
-/* Styling for labels */
-label {
+/* Style labels */
+.form-label {
   font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
 }
 
-/* Styling for input fields and textareas */
-input[type="text"],
-input[type="email"],
-textarea,
-select {
+/* Style input fields */
+.form-input {
   width: 100%;
   padding: 10px;
-  margin: 5px 0;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
-/* Styling for radio buttons and checkboxes */
-input[type="radio"],
-input[type="checkbox"] {
-  margin-right: 5px;
+/* Style radio buttons and checkboxes */
+.form-radio-label,
+.form-checkbox-label {
+  display: inline-block;
+  margin-right: 10px;
 }
 
-/* Styling for buttons */
-button {
-  background-color: #007bff;
-  color: #fff;
+/* Style select dropdown */
+.form-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style the buttons */
+.form-button-container {
+  text-align: center;
+}
+
+.form-button {
   padding: 10px 20px;
+  background-color: #0074d9;
+  color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-button:hover {
+.form-button:hover {
   background-color: #0056b3;
+}
+
+/* Style the error message */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }

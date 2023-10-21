@@ -16,8 +16,6 @@ const dbName = process.env.MONGODB_DATABASE_NAME;
 // Connection URL
 const mongoURI = `mongodb+srv://${username}:${password}@${clusterUrl}/${dbName}?retryWrites=true&w=majority`;
 
-console.log('MongoDB connection URL:', mongoURI);
-
 // Connect to MongoDB using Mongoose
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
@@ -39,17 +37,15 @@ db.once('open', () => {
 // Set up middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+console.log('Middleware set up.');
 
 // Enable CORS for all routes
 app.use(cors());
-console.log('CORS is enabled')
-
-console.log('Middleware set up.');
+console.log('CORS is enabled');
 
 // Import routes from routes.js
 const routes = require('./routes/routes');
 app.use('/', routes);
-
 console.log('Routes imported.');
 
 // Start the server
